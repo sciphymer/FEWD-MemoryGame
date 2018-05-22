@@ -24,7 +24,16 @@ let matchedCard = [];
 let openedCard = [];
 const restartBtn = document.querySelector("div.restart");
 const moves_display = document.querySelector(".moves");
-let move_cnt=0;
+let move_cnt = 0;
+let beginTime = 0;
+let stopTime = 0;
+
+function startTimer(){
+	beginTime = new Date().getTime();
+}
+function stopTimer(){
+	stopTime = new Date().getTime();
+}
 
 /*
  * Display the cards on the page
@@ -32,16 +41,6 @@ let move_cnt=0;
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
-//time delay
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -54,7 +53,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
@@ -78,12 +76,11 @@ function shuffleAndPlaceCard(){
 function wrongCards(){
 	let wrongCards = document.getElementsByClassName("open");
 	for(let i=0; i<wrongCards.length; i++){
-		wrongCards[i].style.backgroundColor
+		wrongCards[i].style.backgroundColor;
 	}
 }
 
 function removeCards(openedCard){
-	// debugger;
 	for(let i=0;i<openedCard.length;i++){
 		let temp_openedcards = document.getElementsByClassName(openedCard[i]);
 		for (let j=0;j<temp_openedcards.length;j++){
@@ -94,20 +91,19 @@ function removeCards(openedCard){
 }
 
 function cardAction(event){
-	// debugger;
 	let target = event.target;
 	//if the click is on the card area
 	if (target.classList == "card"){
-
-		move_cnt ++;
-		moves_display.textContent = move_cnt;
 
 		if(matchedCard.includes(target.childNodes[0].className))
 			return;
 		if(openedCard.length<=2){
 			target.classList.add("open");
-			// sleep(500);
 			target.classList.add("show");
+			//add the moves after the card is opened.
+			move_cnt ++;
+			moves_display.textContent = move_cnt;
+
 			openedCard.push(target.childNodes[0].className);
 			//when a pair of cards are opened, check results
 			if(openedCard.length==2){
@@ -120,6 +116,9 @@ function cardAction(event){
 						temp_matchedCards[i].parentNode.classList.remove("open");
 						temp_matchedCards[i].parentNode.classList.remove("show");
 					}
+					//matched and clear the opendedCard array
+					openedCard.pop();
+					openedCard.pop();
 
 					//check if user wins the game
 					if(matchedCard.includes("fa fa-diamond")&&
@@ -129,32 +128,33 @@ function cardAction(event){
 						matchedCard.includes("fa fa-cube")&&
 						matchedCard.includes("fa fa-bicycle")&&
 						matchedCard.includes("fa fa-bomb")&&
-						matchedCard.includes("fa fa-leaf"))
-						alert("You win the game!!!");
+						matchedCard.includes("fa fa-leaf")){
+						stopTimer();
+						alert("You win the game!!!\n" + "You have used " + Math.round(stopTime-beginTime)/1000 + " sec.");
+					}
+
 
 				} else {
 					// when 2 cards not match, flip cards to backside
 					// 1sec time delay to show the cards before removal
-					setTimeout(function(openedCard){
-					// debugger;
-					for(let i=0;i<openedCard.length;i++){
-						let temp_openedcards = document.getElementsByClassName(openedCard[i]);
-						for (let j=0;j<temp_openedcards.length;j++){
-							temp_openedcards[j].parentNode.classList.remove("open");
-							temp_openedcards[j].parentNode.classList.remove("show");
+					setTimeout(function(){
+						for(let i=0;i<openedCard.length;i++){
+							let temp_openedcards = document.getElementsByClassName(openedCard[i]);
+							for (let j=0;j<temp_openedcards.length;j++){
+								temp_openedcards[j].parentNode.classList.remove("open");
+								temp_openedcards[j].parentNode.classList.remove("show");
+							}
+							console.log(openedCard);
 						}
-					}
-					},1000);
-					// setTimeout(removeCards(openedCard),1000);
-					setTimeout(function(){alert("Hello!")},1000);
-
-					}
-				openedCard.pop();
-				openedCard.pop();
+						openedCard.pop();
+						openedCard.pop();
+					},500);
+				}
 			}else return;
 		}
 	}else return;
 }
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -169,6 +169,7 @@ function newGame(){
 	//shuffle the cards and put the card on the page
 	shuffleAndPlaceCard();
 	gameBoard.addEventListener('click', cardAction);
+	startTimer();
 	//set click listeners to the lists of deck
 
 }
