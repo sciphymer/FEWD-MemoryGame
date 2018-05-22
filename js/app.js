@@ -82,6 +82,17 @@ function wrongCards(){
 	}
 }
 
+function removeCards(openedCard){
+	// debugger;
+	for(let i=0;i<openedCard.length;i++){
+		let temp_openedcards = document.getElementsByClassName(openedCard[i]);
+		for (let j=0;j<temp_openedcards.length;j++){
+			temp_openedcards[j].parentNode.classList.remove("open");
+			temp_openedcards[j].parentNode.classList.remove("show");
+		}
+	}
+}
+
 function cardAction(event){
 	// debugger;
 	let target = event.target;
@@ -121,19 +132,22 @@ function cardAction(event){
 						matchedCard.includes("fa fa-leaf"))
 						alert("You win the game!!!");
 
-				} else{
+				} else {
 					// when 2 cards not match, flip cards to backside
 					// 1sec time delay to show the cards before removal
+					setTimeout(function(openedCard){
 					// debugger;
-
-					sleep(500);
 					for(let i=0;i<openedCard.length;i++){
 						let temp_openedcards = document.getElementsByClassName(openedCard[i]);
-							for (let j=0;j<temp_openedcards.length;j++){
-								temp_openedcards[j].parentNode.classList.remove("open");
-								temp_openedcards[j].parentNode.classList.remove("show");
-							}
+						for (let j=0;j<temp_openedcards.length;j++){
+							temp_openedcards[j].parentNode.classList.remove("open");
+							temp_openedcards[j].parentNode.classList.remove("show");
 						}
+					}
+					},1000);
+					// setTimeout(removeCards(openedCard),1000);
+					setTimeout(function(){alert("Hello!")},1000);
+
 					}
 				openedCard.pop();
 				openedCard.pop();
