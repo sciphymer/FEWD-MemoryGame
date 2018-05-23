@@ -24,11 +24,14 @@ let matchedCard = [];
 let openedCard = [];
 const restartBtn = document.querySelector("div.restart");
 const moves_display = document.querySelector(".moves");
+const playAgainBtn = document.querySelector(".playAgain");
 let move_cnt = 0;
 let beginTime = 0;
 let stopTime = 0;
 let currentTime = 0;
-let star_score = 0;
+let star_score = document.getElementsByClassName("fa-star");
+const overlay1 = document.querySelector(".overlay1");
+const overlay2 = document.querySelector(".overlay2");
 
 function startTimer(){
 	beginTime = new Date().getTime();
@@ -76,22 +79,19 @@ function shuffleAndPlaceCard(){
 }
 
 function getScore(){
-	star_score = document.querySelector(".fa-star");
+
 	currentTime = Math.round(new Date().getTime()-beginTime)/1000;
 	//first star
-	if (move_cnt<=10 && currentTime<=20 && matchedCard.length>=2){
-		star_score.classList.add("fa-star-o");
-		star_score.classList.remove("fa-star");
+	if (move_cnt<=10 && currentTime<=25 && matchedCard.length>=2){
+		star_score[0].classList.add("fa-star-o");
 	}
 	//second star
-	else if (move_cnt<=20 && currentTime<=30 && matchedCard.length>=5){
-		star_score.classList.add("fa-star-o");
-		star_score.classList.remove("fa-star");
+	else if (move_cnt<=15 && currentTime<=30 && matchedCard.length>=5){
+		star_score[1].classList.add("fa-star-o");
 	}
 	//third star
-	else if (move_cnt<=20 && currentTime<=30 && matchedCard.length==8){
-		star_score.classList.add("fa-star-o");
-		star_score.classList.remove("fa-star");
+	else if (move_cnt<=20 && currentTime<=35 && matchedCard.length==8){
+		star_score[2].classList.add("fa-star-o");
 	}
 	// alert(currentTime);
 
@@ -116,7 +116,8 @@ function cardAction(event){
 	let target = event.target;
 	//if the click is on the card area
 	if (target.classList == "card"){
-
+		// let container = document.querySelector(".overlay");
+		// container.classList.add("finish");
 		if(matchedCard.includes(target.childNodes[0].className))
 			return;
 		if(openedCard.length<=2){
@@ -155,17 +156,20 @@ function cardAction(event){
 					getScore();
 
 					//check if user wins the game
-					if(matchedCard.includes("fa fa-diamond")&&
-						matchedCard.includes("fa fa-paper-plane-o")&&
-						matchedCard.includes("fa fa-anchor")&&
-						matchedCard.includes("fa fa-bolt")&&
-						matchedCard.includes("fa fa-cube")&&
-						matchedCard.includes("fa fa-bicycle")&&
-						matchedCard.includes("fa fa-bomb")&&
-						matchedCard.includes("fa fa-leaf")){
-						stopTimer();
+					if(matchedCard.includes("fa fa-diamond")&&matchedCard.includes("fa fa-paper-plane-o")&&
+						matchedCard.includes("fa fa-anchor")&&matchedCard.includes("fa fa-bolt")&&
+						matchedCard.includes("fa fa-cube")&&matchedCard.includes("fa fa-bicycle")&&
+						matchedCard.includes("fa fa-bomb")&&matchedCard.includes("fa fa-leaf")){
 
-						alert("You win the game!!!\n" + "You have used " + Math.round(stopTime-beginTime)/1000 + " sec.");
+						stopTimer();
+						let num_star = document.getElementsByClassName("fa-star-o");
+						// debugger;
+						overlay1.style.display = "inline-block";
+						document.querySelector(".move_Count").innerHTML = move_cnt;
+						document.querySelector(".numOfStars").innerHTML = num_star.length;
+						document.querySelector(".playTime").innerHTML = Math.round((stopTime-beginTime)/1000);
+						setTimeout(function(){overlay2.style.display = "inline-block";
+						},300);
 					}
 				} else {
 					// when 2 cards not match, flip cards to backside
@@ -200,27 +204,41 @@ function cardAction(event){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-function newGame(){
-	//shuffle the cards and put the card on the page
-	shuffleAndPlaceCard();
-	gameBoard.addEventListener('click', cardAction);
-	startTimer();
-	//set click listeners to the lists of deck
 
+function removeStars(){
+	for(let i=0;i<star_score.length;i++){
+		star_score[i].classList.remove("fa-star-o");
+	}
 }
 
-//Restart Game
-restartBtn.addEventListener('click',function(){
-	//initialize Game Board Deck
-	while(gameBoard.hasChildNodes()){
-		gameBoard.firstChild.remove();
-	}
+function newGame(){
+	//initalize parameters
 	move_cnt = 0;
 	moves_display.textContent = 0;
 	matchedCard = [];
 	openedCard = [];
+	removeStars()
+	//initialize Game Board Deck
+	while(gameBoard.hasChildNodes()){
+		gameBoard.firstChild.remove();
+	}
+	//shuffle the cards and put the card on the page
+	shuffleAndPlaceCard();
+	//set click listeners to the lists of deck
+	gameBoard.addEventListener('click', cardAction);
+	startTimer();
+
+}
+
+//Restart Game
+restartBtn.addEventListener('click',newGame);
+
+//Play Again Button shown on complete game screen
+playAgainBtn.addEventListener('click',function(){
+	overlay2.style.display = "none";
+	overlay1.style.display = "none";
 	newGame();
-});
+})
 
 //Initial Start Point
 move_cnt = 0;
