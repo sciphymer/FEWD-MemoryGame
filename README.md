@@ -17,9 +17,9 @@ click __"Play again"__ button to restart the game.
 
 # Scoring
 Inital it has 3 stars, when player used too much steps, the nunber of stars will be deducted.
-16 steps -> deduct first star
-26 steps -> deduct second star
-36 steps -> deduct third star
+- 16 steps -> deduct first star
+- 26 steps -> deduct second star
+- 36 steps -> deduct third star
 
 Thanks for play this game, 
 it is developed by Vincent Ng @2018 
