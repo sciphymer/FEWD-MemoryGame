@@ -1,23 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards=["fa fa-diamond",
-		   "fa fa-paper-plane-o",
-		   "fa fa-anchor",
-		   "fa fa-bolt",
-		   "fa fa-cube",
-		   "fa fa-bicycle",
-		   "fa fa-bomb",
-		   "fa fa-leaf",
-		   "fa fa-diamond",
-		   "fa fa-paper-plane-o",
-		   "fa fa-anchor",
-		   "fa fa-bolt",
-		   "fa fa-cube",
-		   "fa fa-bicycle",
-		   "fa fa-bomb",
-		   "fa fa-leaf",
-		   ];
+const cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
+		   	 "fa fa-cube","fa fa-bicycle","fa fa-bomb","fa fa-leaf",
+		     "fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
+		   "fa fa-cube","fa fa-bicycle","fa fa-bomb","fa fa-leaf",];
 
 const gameBoard = document.querySelector(".deck");
 let matchedCard = [];
@@ -231,7 +218,6 @@ function restartStars(){
 
 function newGame(){
 	//initalize parameters
-
 	clearInterval(timerInterval);
 	move_cnt = 0;
 	moves_display.textContent = 0;
