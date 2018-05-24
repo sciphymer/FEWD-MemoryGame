@@ -26,21 +26,15 @@ const restartBtn = document.querySelector("div.restart");
 const moves_display = document.querySelector(".moves");
 const playAgainBtn = document.querySelector(".playAgain");
 let move_cnt = 0;
-let beginTime = 0;
 let current_step_time = 0;
 let last_step_time = 0;
-let stopTime = 0;
+let timer = 0;
+let timerInterval = 0;
 let star_score = 0;
+let playTime = document.querySelector(".timer");
 const finishGameBkg_Overlay = document.querySelector(".finishGameBkg_Overlay");
 const finishGameMsg_Overlay = document.querySelector(".finishGameMsg_Overlay");
 let clickInProcess = false;
-
-function startTimer(){
-	beginTime = new Date().getTime();
-}
-function stopTimer(){
-	stopTime = new Date().getTime();
-}
 
 /*
  * Display the cards on the page
@@ -119,6 +113,13 @@ function cardAction(event){
 
 	let target = event.target;
 
+	if(timer==0){
+		timerInterval = setInterval(function(){
+		timer++;
+		playTime.innerHTML = timer;
+		},1000)
+	}
+
 	current_step_time = new Date().getTime();
 	// to ensure the wrong card animation is finished before click a new card,
 	// or else the card status cannot be updated in time
@@ -131,6 +132,8 @@ function cardAction(event){
 			if(openedCard.length<=2){
 				target.classList.add("open");
 				target.classList.add("show");
+
+
 
 				openedCard.push(target.childNodes[0].className);
 				//when a pair of cards are opened, check results
@@ -171,12 +174,13 @@ function cardAction(event){
 							matchedCard.includes("fa fa-cube")&&matchedCard.includes("fa fa-bicycle")&&
 							matchedCard.includes("fa fa-bomb")&&matchedCard.includes("fa fa-leaf")){
 
-							stopTimer();
+
 							let num_star = document.getElementsByClassName("fa-star-o");
 							finishGameBkg_Overlay.style.display = "inline-block";
+							clearInterval(timerInterval);
 							document.querySelector(".move_Count").innerHTML = move_cnt;
 							document.querySelector(".numOfStars").innerHTML = num_star.length;
-							document.querySelector(".playTime").innerHTML = Math.round((stopTime-beginTime)/1000);
+							document.querySelector(".playTime").innerHTML = timer;
 							//since finishGameBkg_Overlay has 0.2sec animation, finishGameMsg_overlay need to delay to start after that
 							setTimeout(function(){finishGameMsg_Overlay.style.display = "inline-block";
 							},300);
@@ -227,11 +231,15 @@ function restartStars(){
 
 function newGame(){
 	//initalize parameters
+
+	clearInterval(timerInterval);
 	move_cnt = 0;
 	moves_display.textContent = 0;
 	matchedCard = [];
 	openedCard = [];
 	restartStars();
+	timer = 0;
+	playTime.innerHTML = 0;
 	//initialize Game Board Deck
 	while(gameBoard.hasChildNodes()){
 		gameBoard.firstChild.remove();
@@ -240,7 +248,6 @@ function newGame(){
 	shuffleAndPlaceCard();
 	//set click listeners to the lists of deck
 	gameBoard.addEventListener('click', cardAction);
-	startTimer();
 }
 
 //Restart Game

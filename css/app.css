@@ -114,11 +114,12 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    transition: transform 0.3s;
+
 }
 
 .deck .card.open {
-    transform: rotateY(-180deg);
+	transition: transform 0.3s;
+    transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
 }
@@ -186,4 +187,59 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.score-panel .timeContainer {
+	float: right;
+	display: block;
+	position: inline;
+	padding-right: 50px;
+}
+
+timeContainer.timer {
+	padding:auto 5px;
+}
+
+/*breakpoint for screen below 660px */
+@media screen and (max-width:660px) {
+	.container {
+		width:100vw;
+	}
+	.deck {
+		width:100vw;
+		min-height:100vw;
+		padding:2vw;
+	}
+	.deck .card{
+		height:20vw;
+		width:20vw;
+	}
+	header {
+		width: 50vw
+	}
+	header>h1 {
+		font-size:7vw
+	}
+	.score-panel{
+		width:100vw;
+		font-size:4vw;
+	}
+	.score-panel .timeContainer{
+		padding-right:4vw;
+	}
+	.finishGameMsg_Overlay{
+		width:100vw;
+	}
+	.finishGameMsg_Overlay>h2{
+		font-size:6vw;
+	}
+	.finishGameMsg_Overlay>p{
+		font-size:5vw;
+	}
+	button.playAgain {
+		padding: 3vw 8vw;
+		font-size: 4vw;
+	}
 }
