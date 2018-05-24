@@ -1,20 +1,26 @@
 # Memory Game Project
 
-## Table of Contents
+# Objective of the game
+16 cards with 8 pairs of symbols placed on the deck. 
+Use the least amount of steps and time to turn all the matches up.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+# How to play
+The timer will start after clicking on the card.
+In each step, player can click on 2 cards. 
+If they match, the cards remains open, and player continue to turn other cards.
+If they do not match, the cards will flip over, and player need to choose other pair of cards again.
+Until all the cards get matches, the game will finish. 
 
-## Instructions
+# Finished the game
+There will have a summary of the score and time used.
+click __"Play again"__ button to restart the game.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+# Scoring
+Inital it has 3 stars, when player used too much steps, the nunber of stars will be deducted.
+16 steps -> deduct first star
+26 steps -> deduct second star
+36 steps -> deduct third star
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Thanks for play this game, 
+it is developed by Vincent Ng @2018 
+Course Project of Udacity Frontend Web Development nanodegree.
