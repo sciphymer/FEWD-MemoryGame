@@ -5,7 +5,7 @@
 Use the least amount of steps and time to turn all the matches up.
 
 # How to play
-The timer will start after clicking on the card.
+The timer will automatically start.
 In each step, player can click on 2 cards. 
 If they match, the cards remains open, and player continue to turn other cards.
 If they do not match, the cards will flip over, and player need to choose other pair of cards again.

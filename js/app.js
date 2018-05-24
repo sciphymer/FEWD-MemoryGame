@@ -100,17 +100,17 @@ function cardAction(event){
 
 	let target = event.target;
 
-	if(timer==0){
-		timerInterval = setInterval(function(){
-		timer++;
-		playTime.innerHTML = timer;
-		},1000)
-	}
+	// if(timer==0){
+	// 	timerInterval = setInterval(function(){
+	// 	timer++;
+	// 	playTime.innerHTML = timer;
+	// 	},1000)
+	// }
 
 	current_step_time = new Date().getTime();
 	// to ensure the wrong card animation is finished before click a new card,
 	// or else the card status cannot be updated in time
-	if(((current_step_time-last_step_time)/1000)>0.4){
+	if(((current_step_time-last_step_time)/1000)>0.6){
 		//if the click is on the card area
 		if (target.classList == "card"){
 
@@ -188,7 +188,7 @@ function cardAction(event){
 							}
 							openedCard.pop();
 							openedCard.pop();
-						},400);
+						},700);
 					}
 				}
 			}
@@ -233,6 +233,11 @@ function newGame(){
 	//shuffle the cards and put the card on the page
 	shuffleAndPlaceCard();
 	//set click listeners to the lists of deck
+	timerInterval = setInterval(function(){
+		timer++;
+		playTime.innerHTML = timer;
+		},1000)
+
 	gameBoard.addEventListener('click', cardAction);
 }
 

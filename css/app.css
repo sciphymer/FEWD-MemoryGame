@@ -117,8 +117,8 @@ h1 {
 }
 
 .deck .card.open {
-	transition: transform 0.3s;
-    transform: rotateY(180deg);
+	transition: transform 0.2s;
+    transform: scaleX(-1) rotateY(180deg);
     background: #02b3e4;
     cursor: default;
 }
@@ -150,7 +150,7 @@ h1 {
 .deck .card.wrong {
     background-color: red;
     animation-name: wrongEffect;
-    animation-duration:0.3s;
+    animation-duration:0.5s;
 }
 
 @keyframes wrongEffect {
@@ -221,20 +221,20 @@ timeContainer.timer {
 	header>h1 {
 		font-size:7vw
 	}
-	.score-panel{
+	.score-panel {
 		width:100vw;
 		font-size:4vw;
 	}
 	.score-panel .timeContainer{
 		padding-right:4vw;
 	}
-	.finishGameMsg_Overlay{
+	.finishGameMsg_Overlay {
 		width:100vw;
 	}
-	.finishGameMsg_Overlay>h2{
+	.finishGameMsg_Overlay>h2 {
 		font-size:6vw;
 	}
-	.finishGameMsg_Overlay>p{
+	.finishGameMsg_Overlay>p {
 		font-size:5vw;
 	}
 	button.playAgain {
