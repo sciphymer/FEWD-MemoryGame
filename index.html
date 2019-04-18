@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -30,26 +30,26 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star-o"></i></li>
-        		<li><i class="fa fa-star-o"></i></li>
-        		<li><i class="fa fa-star-o"></i></li>
-        	</ul>
+        	<span class="stars">
+        		<i class="fa fa-star-o"></i>
+        		<i class="fa fa-star-o"></i>
+        		<i class="fa fa-star-o"></i>
+        	</span>
+            
 
-        	<span class="moves">3</span> Moves
-
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
-
-            <div class="timeContainer">
+            <span class="timeContainer">
                  Time: <span class="timer"> 0 </span> sec
-            </div>
-        </section>
+            </span>
 
+
+        	<span class="moves">3 </span> Moves
+        	<i id="repeat_btn"class="fa fa-repeat"></i>
+            <i id="play_btn" class="fa fa-play" onclick="startGame()"></i>
+        </section>
         <ul class="deck">
             <!-- cards are shuffled and added in app.js -->
         </ul>
+        
     </div>
 
     <script src="js/app.js"></script>

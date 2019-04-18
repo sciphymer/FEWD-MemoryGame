@@ -9,7 +9,7 @@ const cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
 const gameBoard = document.querySelector(".deck");
 let matchedCard = [];
 let openedCard = [];
-const restartBtn = document.querySelector("div.restart");
+const restartBtn = document.querySelector("#repeat_btn");
 const moves_display = document.querySelector(".moves");
 const playAgainBtn = document.querySelector(".playAgain");
 let move_cnt = 0;
@@ -211,13 +211,14 @@ function cardAction(event){
 function restartStars(){
 	star_score = document.getElementsByClassName("stars");
 	for(let i=0;i<=2;i++){
-		star_score[0].children[i].firstChild.classList.add("fa-star-o");
-		star_score[0].children[i].firstChild.classList.remove("fa-star");
+		star_score[0].children[i].classList.add("fa-star-o");
+		star_score[0].children[i].classList.remove("fa-star");
 	}
 }
 
-function newGame(){
+function initGame(){
 	//initalize parameters
+	gameBoard.removeEventListener('click', cardAction);
 	clearInterval(timerInterval);
 	move_cnt = 0;
 	moves_display.textContent = 0;
@@ -232,26 +233,28 @@ function newGame(){
 	}
 	//shuffle the cards and put the card on the page
 	shuffleAndPlaceCard();
-	//set click listeners to the lists of deck
+}
+
+function startGame(){
 	timerInterval = setInterval(function(){
 		timer++;
 		playTime.innerHTML = timer;
 		},1000)
-
+	//set click listeners to the lists of deck
 	gameBoard.addEventListener('click', cardAction);
 }
 
 //Restart Game
-restartBtn.addEventListener('click',newGame);
+restartBtn.addEventListener('click',initGame);
 
 //Play Again Button shown on complete game screen
 playAgainBtn.addEventListener('click',function(){
 	finishGameMsg_Overlay.style.display = "none";
 	finishGameBkg_Overlay.style.display = "none";
-	newGame();
+	initGame();
 })
 
 //Initial Start Point
 move_cnt = 0;
 moves_display.textContent = 0;
-newGame();
+initGame();
