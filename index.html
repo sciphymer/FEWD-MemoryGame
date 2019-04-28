@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,46 +10,45 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <div class="finishGameBkg_Overlay"></div>
-
-    <div class="container">
-        <div class="finishGameMsg_Overlay">
+    <div id="container">
+        <div id="finishGameMsg_Overlay">
+			<div id="spacer"></div>
             <h2>Congratulations! You Won!</h2>
             <p>
-                With <span class="move_Count"> 0 </span> Moves and <span class="numOfStars"> 0 </span> Stars!
+                With <span id="move_Count"> 0 </span> Moves and <span id="numOfStars"> 0 </span> score!
             </p>
             <p>
-                Time used: <span class="playTime">0</span> sec !!!!
+                Time used: <span id="playTime">0</span> sec !!!!
             </p>
             <p>Woooooo!</p>
-            <button class="playAgain" type="button">Play again!</button>
+            <button id="playAgain" type="button">Play again!</button>
         </div>
 
         <header>
             <h1>Matching Game</h1>
         </header>
 
-        <section class="score-panel">
-        	<span class="stars">
+        <section id="panel">
+        	<span id="score">
         		<i class="fa fa-star-o"></i>
         		<i class="fa fa-star-o"></i>
         		<i class="fa fa-star-o"></i>
         	</span>
-            
 
-            <span class="timeContainer">
-                 Time: <span class="timer"> 0 </span> sec
+
+            <span id="timeContainer">
+                 Time: <span id="timer"> 0 </span> sec
             </span>
 
 
-        	<span class="moves">3 </span> Moves
+        	<span id="moves">3 </span> Moves
         	<i id="repeat_btn"class="fa fa-repeat"></i>
             <i id="play_btn" class="fa fa-play" onclick="startGame()"></i>
         </section>
         <ul class="deck">
             <!-- cards are shuffled and added in app.js -->
         </ul>
-        
+
     </div>
 
     <script src="js/app.js"></script>

@@ -10,17 +10,17 @@ const gameBoard = document.querySelector(".deck");
 let matchedCard = [];
 let openedCard = [];
 const restartBtn = document.querySelector("#repeat_btn");
-const moves_display = document.querySelector(".moves");
-const playAgainBtn = document.querySelector(".playAgain");
+const moves_display = document.querySelector("#moves");
+const playAgainBtn = document.querySelector("#playAgain");
 let move_cnt = 0;
 let current_step_time = 0;
 let last_step_time = 0;
 let timer = 0;
 let timerInterval = 0;
 let star_score = 0;
-let playTime = document.querySelector(".timer");
-const finishGameBkg_Overlay = document.querySelector(".finishGameBkg_Overlay");
-const finishGameMsg_Overlay = document.querySelector(".finishGameMsg_Overlay");
+let playTime = document.querySelector("#timer");
+const finishGameBkg_Overlay = document.querySelector("#finishGameBkg_Overlay");
+const finishGameMsg_Overlay = document.querySelector("#finishGameMsg_Overlay");
 let clickInProcess = false;
 
 /*
@@ -63,21 +63,21 @@ function shuffleAndPlaceCard(){
 
 function getScore(){
 
-	star_score = document.getElementsByClassName("stars");
+	star_score = document.querySelector("#score");
 	//first star
 	if (move_cnt>=36){
-		star_score[0].children[0].firstChild.classList.add("fa-star");
-		star_score[0].children[0].firstChild.classList.remove("fa-star-o");
+		star_score.children[0].classList.add("fa-star");
+		star_score.children[0].classList.remove("fa-star-o");
 	}
 	//second star
 	else if (move_cnt>=26){
-		star_score[0].children[1].firstChild.classList.add("fa-star");
-		star_score[0].children[1].firstChild.classList.remove("fa-star-o");
+		star_score.children[1].classList.add("fa-star");
+		star_score.children[1].classList.remove("fa-star-o");
 	}
 	//third star
 	else if (move_cnt>=16){
-		star_score[0].children[2].firstChild.classList.add("fa-star");
-		star_score[0].children[2].firstChild.classList.remove("fa-star-o");
+		star_score.children[2].classList.add("fa-star");
+		star_score.children[2].classList.remove("fa-star-o");
 	}
 }
 
@@ -99,13 +99,6 @@ function correctCardsEffect(matchedCards){
 function cardAction(event){
 
 	let target = event.target;
-
-	// if(timer==0){
-	// 	timerInterval = setInterval(function(){
-	// 	timer++;
-	// 	playTime.innerHTML = timer;
-	// 	},1000)
-	// }
 
 	current_step_time = new Date().getTime();
 	// to ensure the wrong card animation is finished before click a new card,
@@ -165,9 +158,9 @@ function cardAction(event){
 							let num_star = document.getElementsByClassName("fa-star-o");
 							finishGameBkg_Overlay.style.display = "inline-block";
 							clearInterval(timerInterval);
-							document.querySelector(".move_Count").innerHTML = move_cnt;
-							document.querySelector(".numOfStars").innerHTML = num_star.length;
-							document.querySelector(".playTime").innerHTML = timer;
+							document.querySelector("#move_Count").innerHTML = move_cnt;
+							document.querySelector("#numOfStars").innerHTML = num_star.length;
+							document.querySelector("#playTime").innerHTML = timer;
 							//since finishGameBkg_Overlay has 0.2sec animation, finishGameMsg_overlay need to delay to start after that
 							setTimeout(function(){finishGameMsg_Overlay.style.display = "inline-block";
 							},300);
@@ -197,22 +190,11 @@ function cardAction(event){
 
 }
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
 function restartStars(){
-	star_score = document.getElementsByClassName("stars");
+	star_score = document.querySelector("#score");
 	for(let i=0;i<=2;i++){
-		star_score[0].children[i].classList.add("fa-star-o");
-		star_score[0].children[i].classList.remove("fa-star");
+		star_score.children[i].classList.add("fa-star-o");
+		star_score.children[i].classList.remove("fa-star");
 	}
 }
 

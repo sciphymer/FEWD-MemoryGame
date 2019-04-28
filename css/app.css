@@ -22,40 +22,36 @@ body {
     z-index:1;
 }
 
-.finishGameBkg_Overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    animation: fadeout 0.2s;
-    animation-fill-mode: forwards;
-    background-color: rgba(255,255,255,0);
-    z-index:10;
-    display:none;
-}
-
 @keyframes fadeout {
 	100% {
-		background-color: rgba(255,255,255,1);
+		background-color: rgba(255,255,255,0.8);
 	}
 }
 
-.finishGameMsg_Overlay {
-	font-family: 'Open Sans', sans-serif;
-    width: 309px;
-    text-align: center;
-    background-color: #FFFFFFFF;
-    z-index: 11;
-    line-height: 8px;
-    position: absolute;
-    top: 200px;
-    display: none;
+#finishGameMsg_Overlay>#spacer {
+    padding-top: 25%;
 }
 
-.finishGameMsg_Overlay h2 {
+#finishGameMsg_Overlay {
+	font-family: 'Open Sans', sans-serif;
+    width: 100vw;
+    text-align: center;
+    height: 100%;
+    top:  0;
+    z-index: 3;
+    line-height: 8px;
+    position: absolute;
+    display: none;
+    animation: fadeout 0.5s;
+    animation-fill-mode: forwards;
+    background-color: rgba(255,255,255,0.9);
+}
+
+#finishGameMsg_Overlay h2 {
 	padding-bottom: 5px;
 }
 
-button.playAgain {
+button#playAgain {
     padding: 6px 20px;
     background-color: #00B9A9;
     color: #FFFFFF;
@@ -63,12 +59,11 @@ button.playAgain {
     border-radius: 5px;
 }
 
-button.playAgain:hover {
+button#playAgain:hover {
 	cursor: pointer;
 }
 
-
-.container {
+#container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,10 +104,10 @@ h1 {
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
@@ -165,7 +160,7 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
+#panel {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
@@ -173,47 +168,24 @@ h1 {
     justify-content: space-between;
 }
 
-.score-panel .stars {
+#panel #score {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-/*.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
-}*/
-
 #repeat_btn, #play_btn:hover{
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 #repeat_btn, #play_btn{
     padding:5px;
 }
 
-/*.score-panel .restart {
-    float: right;
-    cursor: pointer;
-    display: inline-block;
-    padding-right: 10px;
-}*/
-
-/*.score-panel .timeContainer {
-	float: right;
-	display: block;
-	position: inline;
-	padding-right: 50px;
-}*/
-
-/*timeContainer.timer {
-	padding:auto 5px;
-}*/
-
 /*breakpoint for screen below 660px */
 @media screen and (max-width:660px) {
-	.container {
+	#container {
 		width:100vw;
 	}
 	.deck {
@@ -231,24 +203,25 @@ h1 {
 	header>h1 {
 		font-size:7vw
 	}
-	.score-panel {
+	#panel {
 		width:100vw;
 		font-size:4vw;
 	}
-/*	.score-panel .timeContainer{
+/*	.panel .timeContainer{
 		padding-right:4vw;
 	}*/
-	.finishGameMsg_Overlay {
+	#finishGameMsg_Overlay {
 		width:100vw;
 	}
-	.finishGameMsg_Overlay>h2 {
+	#finishGameMsg_Overlay>h2 {
 		font-size:6vw;
 	}
-	.finishGameMsg_Overlay>p {
+	#finishGameMsg_Overlay>p {
 		font-size:5vw;
 	}
-	button.playAgain {
+	button#playAgain {
 		padding: 3vw 8vw;
 		font-size: 4vw;
 	}
 }
+
